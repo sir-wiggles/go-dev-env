@@ -10,11 +10,8 @@ RUN apt-get update && apt-get install -y \
 	npm procps python-dev  \
 	python-pip ssh         \
 	sudo unzip vim         \
-	xz-utils ipython
-
-RUN rm -rf /var/lib/apt/lists/*
-
-#RUN ln -s /usr/bin/nodejs /usr/bin/node && npm install -g bower grunt-cli
+	xz-utils ipython       \
+	fontconfig
 
 # ========================================================================
 # ----------------
@@ -40,6 +37,11 @@ ENV HOME /root
 # ---------
 # VIM Setup
 # ---------
+
+RUN mkdir -p ~/.fonts ~/.config/fontconfig/conf.d
+RUN wget https://github.com/Lokaltog/powerline/raw/develop/font/PowerlineSymbols.otf -O ~/.fonts/PowerlineSymbols.otf
+RUN wget https://github.com/Lokaltog/powerline/raw/develop/font/10-powerline-symbols.conf -O ~/.config/fontconfig/conf.d/10-powerline-symbols.conf
+RUN fc-cache -r ~/.fonts
 
 # Vundle: Vim plugin manager
 RUN git clone https://github.com/gmarik/Vundle.vim.git /root/.vim/bundle/Vundle.vim
