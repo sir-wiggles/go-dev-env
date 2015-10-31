@@ -7,6 +7,7 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'fatih/vim-go'
 Plugin 'majutsushi/tagbar'
 Plugin 'fatih/molokai'
+Plugin 'tmhedberg/SimpylFold'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'bling/vim-airline'
 Plugin 'scrooloose/syntastic'
@@ -26,8 +27,22 @@ set nowrap
 set hidden
 inoremap jk <ESC>
 
+let mapleader=","
+
 " we also want to get rid of accidental trailing whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e
+
+" =================================================
+" ----------
+" Navigation
+" ----------
+" tell vim to allow you to copy between files, remember your cursor
+" position and other little nice things like that
+" split navigations
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
 " =================================================
 " -------------
@@ -107,3 +122,12 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 " ----
 " let g:tmux_navigator_save_on_switch = 1
 
+" =================================================
+" -----------
+" CodeFolding
+" -----------
+" Enable folding
+set foldmethod=indent
+set foldlevel=99
+" Enable folding with the spacebar
+nnoremap <space> za
