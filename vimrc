@@ -10,6 +10,7 @@ Plugin 'fatih/molokai'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'bling/vim-airline'
+Plugin 'bling/vim-bufferline'
 Plugin 'scrooloose/syntastic'
 Plugin 'nsf/gocode', {'rtp': 'vim/'}
 Plugin 'scrooloose/nerdtree'
@@ -28,7 +29,6 @@ set number
 set nowrap
 set hidden
 inoremap jk <ESC>
-
 let mapleader=","
 
 " we also want to get rid of accidental trailing whitespace on save
@@ -45,6 +45,10 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+
+map <leader>n :bn<CR>
+map <leader>p :bp<CR>
+map <leader>d :Bclose<CR>
 
 " =================================================
 " -------------
@@ -139,6 +143,7 @@ let g:tagbar_autoclose = 0
 let g:tagbar_left = 0
 let g:tagbar_expand = 0
 autocmd VimEnter *.go nested :TagbarOpen
+autocmd TabEnter *.go nested :TagbarOpen
 
 let g:tagbar_type_go = {
     \ 'ctagstype' : 'go',
