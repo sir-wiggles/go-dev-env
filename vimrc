@@ -17,6 +17,7 @@ Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'kien/ctrlp.vim'
+Plugin 'jiangmiao/auto-pairs'
 call vundle#end()
 
 filetype plugin indent on
@@ -133,10 +134,11 @@ nnoremap <space> za
 " ------
 " TagBar
 " ------
-nmap <silent> <leader>tb :TagbarToggle<CR>
+nmap <silent> <leader>tt :TagbarToggle<CR>
 let g:tagbar_autoclose = 0
 let g:tagbar_left = 0
 let g:tagbar_expand = 0
+autocmd VimEnter *.go nested :TagbarOpen
 
 let g:tagbar_type_go = {
     \ 'ctagstype' : 'go',
@@ -175,4 +177,11 @@ let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_user_command = 'find %s -type f'
 
-
+" =================================================
+" ------
+" gotags
+" ------
+"  Auto generate tags
+au BufWritePost *.go silent! !gotags -silent -R % > tags
+" navigate back to where we jumped from
+nnoremap <C-[> <C-t>
