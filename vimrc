@@ -16,10 +16,11 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'flazz/vim-colorschemes'
+Plugin 'kien/ctrlp.vim'
 call vundle#end()
 
 filetype plugin indent on
-"Ok. Done.
+""Ok. Done.
 
 set backspace=indent,eol,start
 set number
@@ -51,10 +52,10 @@ nnoremap <C-H> <C-W><C-H>
 " tell vim to allow you to copy between files, remember your cursor
 " position and other little nice things like that
 set viminfo='100,\"2500,:200,%,n~/.viminfo
-
-" Open file at a position where it was last left.
+"
+"" Open file at a position where it was last left.
 au BufWinLeave *.go mkview
-au BufWinEnter *.go silent loadview
+"au BufWinEnter *.go silent loadview
 
 " use goimports for formatting
 let g:go_fmt_command = "goimports"
@@ -89,18 +90,14 @@ au Filetype go nnoremap <leader>t :tab split <CR>:exe "GoDef"<CR>
 set t_Co=256
 syntax enable
 set background=dark
-
-try
-  colorscheme distinguished
-catch E185
-endtry
+colorscheme distinguished
 
 " =================================================
 " -------
 " Airline
 " -------
 " display fonts correctly for airline
-set encoding=utf-8
+"set encoding=utf-8
 " Allows the bottom status line for airline to be shown
 set laststatus=2
 let g:airline_powerline_fonts=1
@@ -116,11 +113,11 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 map <C-n> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
-" =================================================
-" ----
-" Tmux
-" ----
-" let g:tmux_navigator_save_on_switch = 1
+"" =================================================
+"" ----
+"" Tmux
+"" ----
+"" let g:tmux_navigator_save_on_switch = 1
 
 " =================================================
 " -----------
@@ -131,3 +128,51 @@ set foldmethod=indent
 set foldlevel=99
 " Enable folding with the spacebar
 nnoremap <space> za
+
+" =================================================
+" ------
+" TagBar
+" ------
+nmap <silent> <leader>tb :TagbarToggle<CR>
+let g:tagbar_autoclose = 0
+let g:tagbar_left = 0
+let g:tagbar_expand = 0
+
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }
+
+" =================================================
+" ------
+" Ctrl-P
+" ------
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_user_command = 'find %s -type f'
+
+
