@@ -46,9 +46,8 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-map <leader>n :bn<CR>
-map <leader>p :bp<CR>
-map <leader>d :Bclose<CR>
+map gb :bn<CR>
+map gB :bp<CR>
 
 " =================================================
 " -------------
